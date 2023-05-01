@@ -1,14 +1,16 @@
-from youtube_transcript_api import YouTubeTranscriptApi
+# Importing required libraries
 
+from youtube_transcript_api import YouTubeTranscriptApi
 import os
 import openai
 from dotenv import load_dotenv, find_dotenv
 
-# Using OpenAI API
+# Using OpenAI API to generate text summaries
 _ = load_dotenv(find_dotenv()) # read local .env file
 
 openai.api_key  = os.getenv('OPENAI_API_KEY')
 
+# Creating a function to generate text completion based on the given prompt using OpenAI API.
 def get_completion(prompt, model="gpt-3.5-turbo"): 
     messages = [{"role": "user", "content": prompt}]
     response = openai.ChatCompletion.create(
@@ -18,9 +20,10 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
     )
     return response.choices[0].message["content"]
 
-
+# This functionExtracts business ideas from a YouTube video transcript using OpenAI text generation API
 def extract_ideas(vid_id):
-    srt = YouTubeTranscriptApi.get_transcript("7x5M4lxK-dw")
+    # Getting transcript from youtube video
+    srt = YouTubeTranscriptApi.get_transcript(vid_id)
     # Creating an empty list to store ideas scrapped from parts of the video
     ideas = [] 
     # Splitting the entrire into batches so that doesn't exceed openai api limit
