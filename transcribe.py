@@ -48,7 +48,7 @@ def extract_ideas(vid_id):
 
         response = get_completion(prompt)
         ideas.append(response)
-    # Secondary prompt for 
+    # Secondary prompt for reading all the ideas and summarizing those into final results
     prompt1 = f"""
     Your task is to summarise all the business into full business ideas based on the \
     list of ideas given. Make sure first you go through all the ideas, then combine all the ideas\
